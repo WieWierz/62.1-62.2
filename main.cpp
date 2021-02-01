@@ -1,5 +1,8 @@
 #include <iostream>
 #include <fstream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 using namespace std;
 
@@ -14,11 +17,14 @@ void licz::pierwsze(){
 	ofstream plik2;
 	int t[1000];
 	int min,max;
+	char* endptr;
 	
 	plik1.open("liczby1.txt");
 	while(plik1.good()){
 		for(int i=0;i<1000;i++){
-			plik1 >> t[i];
+			plik1 >> liczba;
+			int liczba = strtol(liczba.c_str(), &endptr, 8);
+			t[i] = liczba;
 		}
 	}
 	int dlugosc = sizeof(t);
@@ -32,16 +38,6 @@ void licz::pierwsze(){
 			max = t[i];
 	}
 
-	
-	while(min){
-	min=min%8;
-    min/=8;
-	}
-	
-	while(max){
-	max=max%8;
-    max/=8;
-	}
 			
 	cout<<"Najmniejsza liczba: "<<min<<endl;
 	cout<<"Najwieksza liczba: "<<max<<endl;
@@ -54,6 +50,7 @@ void licz::drugie(){
 	int najdluzszy=0;
 	int najdluzszy2=0;
 	int poczatek;
+	
 	
 	plik3.open("liczby2.txt");
 	while(plik3.good()){
